@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:orientation="vertical">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center"
+            app:lottie_rawRes="@raw/create_acount_animation"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintAnimationEnabled="true"
+            app:hintEnabled="true">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/field_login"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Email"
+                android:inputType="text"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintAnimationEnabled="true"
+            android:layout_marginTop="12dp"
+            app:hintEnabled="true">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/field_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Senha"
+                android:inputType="numberPassword"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <Button
+            android:layout_marginVertical="32dp"
+            android:id="@+id/btn_create_acount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Criar conta"/>
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
