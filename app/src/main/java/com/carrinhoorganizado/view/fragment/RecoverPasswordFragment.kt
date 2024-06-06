@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.carrinhoorganizado.databinding.FragmentRecoverPasswordBinding
 
-class RecoverPasswordFragment: Fragment() {
+class RecoverPasswordFragment : Fragment() {
     private var _binding: FragmentRecoverPasswordBinding? = null
     private val mBinding get() = _binding!!
     override fun onCreateView(

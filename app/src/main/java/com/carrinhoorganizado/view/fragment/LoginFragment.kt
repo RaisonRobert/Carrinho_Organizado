@@ -32,7 +32,7 @@ class LoginFragment : Fragment() {
         mBinding.btnLogin.setOnClickListener {
             startActivity(Intent(requireContext(), HomeActivity::class.java))
         }
-        mBinding.txtCreateAcount.setOnClickListener{
+        mBinding.txtCreateAcount.setOnClickListener {
             findNavController().navigate(R.id.action_login_to_create_acount)
         }
         mBinding.txtRecoverPassword.setOnClickListener {
