@@ -10,7 +10,9 @@ import androidx.navigation.fragment.findNavController
 import com.carrinhoorganizado.R
 import com.carrinhoorganizado.databinding.FragmentLoginBinding
 import com.carrinhoorganizado.view.activity.HomeActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val mBinding get() = _binding!!

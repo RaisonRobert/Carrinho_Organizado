@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.carrinhoorganizado.databinding.FragmentCreateAcountBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CreateAcountFragment : Fragment() {
     private var _binding: FragmentCreateAcountBinding? = null
     private val mBinding get() = _binding!!

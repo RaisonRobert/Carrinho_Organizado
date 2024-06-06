@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.carrinhoorganizado.databinding.FragmentRecoverPasswordBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RecoverPasswordFragment : Fragment() {
     private var _binding: FragmentRecoverPasswordBinding? = null
     private val mBinding get() = _binding!!
