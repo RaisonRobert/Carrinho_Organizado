@@ -6,24 +6,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import com.carrinhoorganizado.R
-import com.carrinhoorganizado.databinding.FragmentLoginBinding
-import com.carrinhoorganizado.viewmodel.LoginViewModel
+import com.carrinhoorganizado.databinding.FragmentCreateAcountBinding
+import com.carrinhoorganizado.viewmodel.CreateAccountViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginFragment : Fragment() {
-    private var _binding: FragmentLoginBinding? = null
+class CreateAccountFragment : Fragment() {
+    private var _binding: FragmentCreateAcountBinding? = null
     private val mBinding get() = _binding!!
-    private val mViewModel: LoginViewModel by viewModels()
+    private val mViewModel: CreateAccountViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        _binding = FragmentCreateAcountBinding.inflate(inflater, container, false)
         return mBinding.root
     }
 
@@ -32,12 +30,13 @@ class LoginFragment : Fragment() {
         setupOnClick()
         observeUIState()
     }
-
     private fun observeUIState() {
-        mViewModel.startLogin.observe(viewLifecycleOwner) { startLogin ->
-            if (startLogin) {
+        mViewModel.createAccountLogin.observe(viewLifecycleOwner) { createAccountLogin ->
+            if (createAccountLogin) {
                 clearErrorFields()
-                mViewModel.startLoginAuthenticationFirebase()
+                val email = mBinding.fieldLogin.text.toString()
+                val password = mBinding.fieldPassword.text.toString()
+                mViewModel.createAccountAuthenticationFirebase(email, password)
             }
         }
         mViewModel.errorLogin.observe(viewLifecycleOwner) { errorLogin ->
@@ -58,16 +57,10 @@ class LoginFragment : Fragment() {
     }
 
     private fun setupOnClick() {
-        mBinding.btnLogin.setOnClickListener {
+        mBinding.btnCreateAccount.setOnClickListener {
             val email = mBinding.fieldLogin.text.toString()
             val password = mBinding.fieldPassword.text.toString()
             mViewModel.verifyField(email, password)
-        }
-        mBinding.txtCreateAcount.setOnClickListener {
-            findNavController().navigate(R.id.action_login_to_create_acount)
-        }
-        mBinding.txtRecoverPassword.setOnClickListener {
-            findNavController().navigate(R.id.action_login_to_recover_password)
         }
     }
 }

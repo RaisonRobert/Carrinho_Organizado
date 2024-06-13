@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/create_acount"
-        android:name="com.carrinhoorganizado.view.fragment.CreateAcountFragment"
+        android:name="com.carrinhoorganizado.view.fragment.CreateAccountFragment"
         android:label="Criar Conta"
         tools:layout="@layout/fragment_create_acount" />
     <fragment

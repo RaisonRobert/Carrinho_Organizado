@@ -9,28 +9,27 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(private val repository: ShoppingCartRepository) :
-    ViewModel() {
-    private val TAG = "LoginViewModel"
-    val startLogin = MutableLiveData<Boolean>()
+class RecoverPasswordViewModel @Inject constructor(private val repository: ShoppingCartRepository) :
+    ViewModel()  {
+    private val TAG = "RecoverPasswordViewModel"
+    val recoverPassword = MutableLiveData<Boolean>()
     val errorLogin = MutableLiveData<Boolean>()
 
     init {
-        startLogin.value = false
+        recoverPassword.value = false
         errorLogin.value = false
     }
 
-    fun startLoginAuthenticationFirebase() {
-        Log.i(TAG,"Por favor tudo ok para logar")
+    fun recoverPasswordAuthenticationFirebase(email: String) {
+        Log.i(TAG,"Por favor tudo pronto para recuperar senha: $email")
     }
 
-    fun verifyField(email: String, password: String) {
+    fun verifyField(email: String) {
         when {
             email.isInvalidEmail() -> errorLogin.value = true
-            password.isBlank() -> errorLogin.value = true
             else -> {
                 errorLogin.value = false
-                startLogin.value = true
+                recoverPassword.value = true
             }
         }
     }

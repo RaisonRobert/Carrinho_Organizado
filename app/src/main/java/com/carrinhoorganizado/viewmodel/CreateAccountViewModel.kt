@@ -9,19 +9,19 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(private val repository: ShoppingCartRepository) :
-    ViewModel() {
-    private val TAG = "LoginViewModel"
-    val startLogin = MutableLiveData<Boolean>()
+class CreateAccountViewModel @Inject constructor(private val repository: ShoppingCartRepository) :
+    ViewModel()  {
+    private val TAG = "CreateAccountViewModel"
+    val createAccountLogin = MutableLiveData<Boolean>()
     val errorLogin = MutableLiveData<Boolean>()
 
     init {
-        startLogin.value = false
+        createAccountLogin.value = false
         errorLogin.value = false
     }
 
-    fun startLoginAuthenticationFirebase() {
-        Log.i(TAG,"Por favor tudo ok para logar")
+    fun createAccountAuthenticationFirebase(email: String, password: String) {
+        Log.i(TAG,"Por favor tudo pronto para criar conta: $email, $password")
     }
 
     fun verifyField(email: String, password: String) {
@@ -30,7 +30,7 @@ class LoginViewModel @Inject constructor(private val repository: ShoppingCartRep
             password.isBlank() -> errorLogin.value = true
             else -> {
                 errorLogin.value = false
-                startLogin.value = true
+                createAccountLogin.value = true
             }
         }
     }
