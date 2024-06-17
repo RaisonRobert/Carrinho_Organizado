@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.carrinhoorganizado.extension.isInvalidEmail
 import com.carrinhoorganizado.repository.ShoppingCartRepository
+import com.carrinhoorganizado.view.uistate.UiStateCreateAccount
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -12,25 +13,18 @@ import javax.inject.Inject
 class CreateAccountViewModel @Inject constructor(private val repository: ShoppingCartRepository) :
     ViewModel()  {
     private val TAG = "CreateAccountViewModel"
-    val createAccountLogin = MutableLiveData<Boolean>()
-    val errorLogin = MutableLiveData<Boolean>()
-
-    init {
-        createAccountLogin.value = false
-        errorLogin.value = false
-    }
+    val uiState = MutableLiveData<UiStateCreateAccount?>()
 
     fun createAccountAuthenticationFirebase(email: String, password: String) {
         Log.i(TAG,"Por favor tudo pronto para criar conta: $email, $password")
     }
 
     fun verifyField(email: String, password: String) {
-        when {
-            email.isInvalidEmail() -> errorLogin.value = true
-            password.isBlank() -> errorLogin.value = true
+       uiState.value = when {
+            email.isInvalidEmail() -> UiStateCreateAccount.ErrorCreateAccount
+            password.isBlank() -> UiStateCreateAccount.ErrorCreateAccount
             else -> {
-                errorLogin.value = false
-                createAccountLogin.value = true
+                UiStateCreateAccount.CreateAccount
             }
         }
     }
