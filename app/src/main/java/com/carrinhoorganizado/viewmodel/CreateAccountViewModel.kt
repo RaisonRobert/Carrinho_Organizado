@@ -11,16 +11,19 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CreateAccountViewModel @Inject constructor(private val repository: ShoppingCartRepository) :
-    ViewModel()  {
+    ViewModel() {
     private val TAG = "CreateAccountViewModel"
     val uiState = MutableLiveData<UiStateCreateAccount?>()
+    fun clearUiState() {
+        uiState.value = null
+    }
 
     fun createAccountAuthenticationFirebase(email: String, password: String) {
-        Log.i(TAG,"Por favor tudo pronto para criar conta: $email, $password")
+        Log.i(TAG, "Por favor tudo pronto para criar conta: $email, $password")
     }
 
     fun verifyField(email: String, password: String) {
-       uiState.value = when {
+        uiState.value = when {
             email.isInvalidEmail() -> UiStateCreateAccount.ErrorCreateAccount
             password.isBlank() -> UiStateCreateAccount.ErrorCreateAccount
             else -> {

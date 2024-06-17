@@ -1,6 +1,6 @@
 package com.carrinhoorganizado.view.uistate
 
-sealed class UiStateRecoverPassword{
+sealed class UiStateRecoverPassword {
     data object RecoverPassword : UiStateRecoverPassword()
     data object ErrorRecoverPassword : UiStateRecoverPassword()
 }

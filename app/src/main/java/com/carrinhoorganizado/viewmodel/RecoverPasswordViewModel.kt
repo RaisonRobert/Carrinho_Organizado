@@ -11,16 +11,19 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RecoverPasswordViewModel @Inject constructor(private val repository: ShoppingCartRepository) :
-    ViewModel()  {
+    ViewModel() {
     private val TAG = "RecoverPasswordViewModel"
     val uiState = MutableLiveData<UiStateRecoverPassword?>()
+    fun clearUiState() {
+        uiState.value = null
+    }
 
     fun recoverPasswordAuthenticationFirebase(email: String) {
-        Log.i(TAG,"Por favor tudo pronto para recuperar senha: $email")
+        Log.i(TAG, "Por favor tudo pronto para recuperar senha: $email")
     }
 
     fun verifyField(email: String) {
-       uiState.value = when {
+        uiState.value = when {
             email.isInvalidEmail() -> UiStateRecoverPassword.ErrorRecoverPassword
             else -> {
                 UiStateRecoverPassword.RecoverPassword

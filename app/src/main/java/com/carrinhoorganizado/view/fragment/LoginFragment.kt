@@ -35,19 +35,20 @@ class LoginFragment : Fragment() {
     }
 
     private fun observeUIState() {
-        mViewModel.uiState.observe(viewLifecycleOwner){state ->
+        mViewModel.uiState.observe(viewLifecycleOwner) { state ->
             state?.also {
-               updateUI(state)
+                updateUI(state)
             }
         }
     }
 
     private fun updateUI(state: UiStateLogin) {
-        when (state){
+        when (state) {
             is UiStateLogin.StartLogin -> {
                 clearErrorFields()
                 mViewModel.startLoginAuthenticationFirebase()
             }
+
             is UiStateLogin.ErrorLogin -> {
                 errorFieldLogin("Error digite novamente seu login")
             }

@@ -15,18 +15,18 @@ class LoginViewModel @Inject constructor(private val repository: ShoppingCartRep
     private val TAG = "LoginViewModel"
     val uiState = MutableLiveData<UiStateLogin?>()
 
-    fun clearUiState(){
+    fun clearUiState() {
         uiState.value = null
     }
 
 
     fun startLoginAuthenticationFirebase() {
-        Log.i(TAG,"Por favor tudo ok para logar")
+        Log.i(TAG, "Por favor tudo ok para logar")
     }
 
     fun verifyField(email: String, password: String) {
         uiState.value = when {
-            email.isInvalidEmail() ->  UiStateLogin.ErrorLogin
+            email.isInvalidEmail() -> UiStateLogin.ErrorLogin
             password.isBlank() -> UiStateLogin.ErrorLogin
             else -> {
                 UiStateLogin.StartLogin

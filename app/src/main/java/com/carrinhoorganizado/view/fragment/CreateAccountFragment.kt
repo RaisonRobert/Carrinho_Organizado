@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.carrinhoorganizado.databinding.FragmentCreateAcountBinding
 import com.carrinhoorganizado.view.uistate.UiStateCreateAccount
-import com.carrinhoorganizado.view.uistate.UiStateLogin
 import com.carrinhoorganizado.viewmodel.CreateAccountViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,26 +31,35 @@ class CreateAccountFragment : Fragment() {
         setupOnClick()
         observeUIState()
     }
+
     private fun observeUIState() {
-        mViewModel.uiState.observe(viewLifecycleOwner){state ->
+        mViewModel.uiState.observe(viewLifecycleOwner) { state ->
             state?.also {
                 updateUI(state)
             }
         }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mViewModel.clearUiState()
+    }
+
     private fun updateUI(state: UiStateCreateAccount) {
-        when (state){
+        when (state) {
             is UiStateCreateAccount.CreateAccount -> {
                 clearErrorFields()
                 val email = mBinding.fieldLogin.text.toString()
                 val password = mBinding.fieldPassword.text.toString()
                 mViewModel.createAccountAuthenticationFirebase(email, password)
             }
+
             is UiStateCreateAccount.ErrorCreateAccount -> {
                 errorFieldLogin("Error digite novamente seu login")
             }
         }
     }
+
     private fun errorFieldLogin(msg: String) {
         mBinding.layoutLogin.error = msg
         mBinding.layoutPassword.error = msg
