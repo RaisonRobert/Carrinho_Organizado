@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "169366896918",
+    "project_id": "carrinho-organizado-cfb1c",
+    "storage_bucket": "carrinho-organizado-cfb1c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169366896918:android:700273af4ea45756f41037",
+        "android_client_info": {
+          "package_name": "com.carrinhoorganizado"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhXhS5JfByyJpm5bLVmK7bABHApOEG-2w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
