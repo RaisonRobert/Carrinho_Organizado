@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.carrinhoorganizado.R
 import com.carrinhoorganizado.databinding.FragmentLoginBinding
+import com.carrinhoorganizado.view.uistate.UiStateLogin
 import com.carrinhoorganizado.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,17 +35,29 @@ class LoginFragment : Fragment() {
     }
 
     private fun observeUIState() {
-        mViewModel.startLogin.observe(viewLifecycleOwner) { startLogin ->
-            if (startLogin) {
+        mViewModel.uiState.observe(viewLifecycleOwner) { state ->
+            state?.also {
+                updateUI(state)
+            }
+        }
+    }
+
+    private fun updateUI(state: UiStateLogin) {
+        when (state) {
+            is UiStateLogin.StartLogin -> {
                 clearErrorFields()
                 mViewModel.startLoginAuthenticationFirebase()
             }
-        }
-        mViewModel.errorLogin.observe(viewLifecycleOwner) { errorLogin ->
-            if (errorLogin) {
+
+            is UiStateLogin.ErrorLogin -> {
                 errorFieldLogin("Error digite novamente seu login")
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mViewModel.clearUiState()
     }
 
     private fun errorFieldLogin(msg: String) {

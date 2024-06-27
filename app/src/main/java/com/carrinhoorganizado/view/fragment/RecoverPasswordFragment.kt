@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.carrinhoorganizado.databinding.FragmentRecoverPasswordBinding
+import com.carrinhoorganizado.view.uistate.UiStateRecoverPassword
 import com.carrinhoorganizado.viewmodel.RecoverPasswordViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -14,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class RecoverPasswordFragment : Fragment() {
     private var _binding: FragmentRecoverPasswordBinding? = null
     private val mBinding get() = _binding!!
-    private val mViewModel: RecoverPasswordViewModel by viewModels ()
+    private val mViewModel: RecoverPasswordViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,22 +26,35 @@ class RecoverPasswordFragment : Fragment() {
         return mBinding.root
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mViewModel.clearUiState()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupOnClick()
         observeUIState()
     }
+
     private fun observeUIState() {
-        mViewModel.recoverPassword.observe(viewLifecycleOwner) { createAccountLogin ->
-            if (createAccountLogin) {
+        mViewModel.uiState.observe(viewLifecycleOwner) { state ->
+            state?.also {
+                updateUI(state)
+            }
+        }
+    }
+
+    private fun updateUI(state: UiStateRecoverPassword) {
+        when (state) {
+            is UiStateRecoverPassword.RecoverPassword -> {
                 clearErrorFields()
                 val email = mBinding.fieldLogin.text.toString()
                 mViewModel.recoverPasswordAuthenticationFirebase(email)
             }
-        }
-        mViewModel.errorLogin.observe(viewLifecycleOwner) { errorLogin ->
-            if (errorLogin) {
-                errorFieldLogin("Error digite novamente seu login")
+
+            is UiStateRecoverPassword.ErrorRecoverPassword -> {
+                errorFieldLogin("Error digite novamente seu email")
             }
         }
     }
